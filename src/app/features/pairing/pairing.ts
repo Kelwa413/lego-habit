@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StateService } from '../../core/state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pairing',
@@ -13,7 +14,7 @@ import { StateService } from '../../core/state';
 export class PairingComponent {
   code = '';
 
-  constructor(private state: StateService) {}
+  constructor(private state: StateService, private router: Router) {}
 
   get savedCode() {
     return this.state.state().pairingCode;
@@ -22,9 +23,10 @@ export class PairingComponent {
   save() {
     this.state.setPairingCode(this.code.trim());
     this.code = '';
+    this.router.navigateByUrl('/setup');
   }
 
   clear() {
-    this.state.clearPairing();
+    this.state.clearAll();
   }
 }

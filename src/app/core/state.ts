@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { AppState } from './models/app-state';
+import { AppState, HabitConfig } from './models/app-state';
+import { from } from 'rxjs';
 
 const KEY = 'legoHabit.state';
 
@@ -10,8 +11,7 @@ export class StateService {
 
   private load(): AppState {
     try {
-      const stored = localStorage.getItem(KEY);
-      return stored ? JSON.parse(stored) : {};
+      return JSON.parse(localStorage.getItem(KEY) || '{}');
     } catch {
       return {};
     }
@@ -22,14 +22,31 @@ export class StateService {
   }
 
   setPairingCode(code: string) {
-    const newState = { ...this.stateSig(), pairingCode: code.trim() };
-    this.stateSig.set(newState);
-    this.save(newState);
+    const next = { ...this.stateSig(), pairingCode: code.trim() };
+    this.stateSig.set(next);
+    this.save(next);
   }
 
-  clearPairing() {
-    const newState = {};
-    this.stateSig.set(newState);
+  setHabit(habit: HabitConfig) {
+    const next = { ...this.stateSig(), habit };
+    this.stateSig.set(next);
+    this.save(next);
+  }
+
+  clearAll() {
+    this.stateSig.set({});
     localStorage.removeItem(KEY);
+  }
+
+  checkIn() {
+    const s = this.stateSig();
+    if (!s.habit) return;
+    const outcome = s.habit.kind === 'start' ? 'success' : 'fail'; // single-button behavior
+    const next: AppState = {
+      ...s,
+      habitState: { lastCheckISO: new Date().toISOString(), lastOutcome: outcome },
+    };
+    this.stateSig.set(next);
+    this.save(next);
   }
 }

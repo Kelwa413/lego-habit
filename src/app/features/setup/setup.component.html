@@ -1,1 +1,63 @@
-<p>setup works!</p>
+<mat-horizontal-stepper linear>
+  <mat-step [stepControl]="kindForm">
+    <form [formGroup]="kindForm">
+      <h2>What type of habit?</h2>
+      <mat-radio-group formControlName="kind" class="v">
+        <mat-radio-button value="start">Start a good habit</mat-radio-button>
+        <mat-radio-button value="stop">Stop a bad habit</mat-radio-button>
+      </mat-radio-group>
+      <div class="actions">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="kindForm.invalid">
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="nameForm">
+    <form [formGroup]="nameForm">
+      <h2>Name your habit</h2>
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>Habit name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <div class="actions">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="nameForm.invalid">
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="freqForm">
+    <form [formGroup]="freqForm">
+      <h2>Frequency</h2>
+      <mat-radio-group formControlName="frequency" class="v">
+        <mat-radio-button value="daily">Daily</mat-radio-button>
+        <mat-radio-button value="times-per-week">Times per week</mat-radio-button>
+      </mat-radio-group>
+
+      <div class="row" *ngIf="freqForm.value.frequency === 'times-per-week'">
+        <mat-form-field appearance="outline">
+          <mat-label>Times / week</mat-label>
+          <input matInput type="number" min="1" max="7" formControlName="timesPerWeek" />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Preferred check-in time</mat-label>
+          <input matInput type="time" formControlName="checkinTime" />
+        </mat-form-field>
+      </div>
+
+      <div class="actions">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-raised-button color="primary" (click)="finish()" [disabled]="freqForm.invalid">
+          Finish
+        </button>
+      </div>
+    </form></mat-step
+  ></mat-horizontal-stepper
+>
