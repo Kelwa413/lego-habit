@@ -1,0 +1,15 @@
+<div class="sheet">
+  <h1>Pair your LEGO Plant</h1>
+
+  <form (ngSubmit)="save()" #f="ngForm">
+    <input
+      type="text"
+      name="code"
+      [(ngModel)]="code"
+      placeholder="Enter code"
+      maxlength="6"
+      required
+    />
+    <button type="submit" [disabled]="!f.valid">Pair</button>
+  </form>
+</div>
