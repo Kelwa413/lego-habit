@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { AppState, HabitConfig } from './models/app-state';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const KEY = 'legoHabit.state';
 
@@ -42,10 +42,10 @@ export class StateService {
   }
 
   checkIn(action: 'up' | 'down') {
-    const url =
-      action === 'up' ? 'http://100.122.217.84:3000/up' : 'http://100.122.217.84:3000/down';
+    const url = action === 'up' ? 'http://100.102.19.51:3000/up' : 'http://100.102.19.51:3000/down';
 
-    return this.http.post<{ ok?: boolean }>(url, {});
+    const headers = new HttpHeaders({ 'Content-Type': 'text/plain' });
+    return this.http.post(url, '', { headers, responseType: 'text' });
   }
 
   clearAll() {
@@ -54,6 +54,6 @@ export class StateService {
   }
 
   pingServer() {
-    return this.http.get<{ health: number }>('http://100.122.217.84:3000/ping');
+    return this.http.get<{ health: number }>('http://100.102.19.51:3000/ping');
   }
 }

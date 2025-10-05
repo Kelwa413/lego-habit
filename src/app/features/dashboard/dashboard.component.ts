@@ -61,15 +61,23 @@ export class Dashboard implements OnInit {
   }
 
   testUp() {
-    this.state.checkIn('up');
-    console.log('up');
-    this.refreshHealth();
+    this.state.checkIn('up').subscribe({
+      next: () => {
+        console.log('up');
+        this.refreshHealth();
+      },
+      error: (err) => console.error('Test up failed:', err),
+    });
   }
 
   testDown() {
-    this.state.checkIn('down');
-    console.log('down');
-    this.refreshHealth();
+    this.state.checkIn('down').subscribe({
+      next: () => {
+        console.log('down');
+        this.refreshHealth();
+      },
+      error: (err) => console.error('Test down failed:', err),
+    });
   }
 
   clearStorage() {
