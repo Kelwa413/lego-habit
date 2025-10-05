@@ -1,3 +1,30 @@
-<button (click)="doCheckIn()">
-  {{ state.state().habit?.kind === 'start' ? 'I did my good habit' : 'I did my bad habit' }}
-</button>
+<div class="dashboard">
+  <header class="header">
+    <h1>{{ state.state().habit?.name || 'Your Plant' }}</h1>
+    <p *ngIf="state.state().habit">Daily check-in by {{ state.state().habit?.checkInTime }}</p>
+  </header>
+
+  <section class="card main">
+    <button class="btn btn-main" (click)="doCheckIn()">
+      {{
+        state.state().habit?.kind === 'start' ? 'I did my good habit 🌿' : 'I did my bad habit 💀'
+      }}
+    </button>
+  </section>
+
+  <section class="card side">
+    <div class="row">
+      <button class="btn btn-secondary" (click)="testUp()">Test Up</button>
+      <button class="btn btn-secondary" (click)="testDown()">Test Down</button>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-secondary" routerLink="/setup">Setup Habit</button>
+      <button class="btn btn-secondary" routerLink="/pair">Pair New Plant</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <button class="btn btn-danger" (click)="clearStorage()">Clear local data</button>
+  </footer>
+</div>

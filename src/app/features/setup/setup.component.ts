@@ -60,8 +60,6 @@ export class Setup {
     this.state.setHabit({
       kind,
       name,
-      frequency,
-      timesPerWeek,
       checkInTime,
     });
 

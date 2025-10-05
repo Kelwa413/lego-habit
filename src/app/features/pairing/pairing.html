@@ -1,8 +1,9 @@
 <div class="sheet">
   <h1>Pair your LEGO Plant</h1>
 
-  <form (ngSubmit)="save()" #f="ngForm">
+  <form (ngSubmit)="save()" #f="ngForm" class="pairing-form">
     <input
+      class="input"
       type="text"
       name="code"
       [(ngModel)]="code"
@@ -10,6 +11,22 @@
       maxlength="6"
       required
     />
-    <button type="submit" [disabled]="!f.valid">Pair</button>
+
+    <button class="btn-primary" type="submit" [disabled]="!f.valid">Pair</button>
   </form>
 </div>
+
+<pre class="plant">
+               __ .-~-.   .~``~,._
+             .~  `     \ /     .  `\
+             |     \    |   .'     |
+       _      \     `.  |  /    __/
+    .~` `'. .--;.       ,.O  -~`   `\
+    \  '-. |     `-  o.O/o, __       |
+     '-.,__ \    .-~' `\|o `  ~.    /_
+       _.--'/   `    ,  /  \        | `~-.,
+      /     |       /  :    '._    / -.    `\
+     /   .-' '.___.;   `      \`--'\    `    |
+    |          /    \         /     '.__,.--,/
+    '--..,___.'      `~--'--~'
+</pre>

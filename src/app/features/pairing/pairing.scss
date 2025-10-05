@@ -1,18 +1,51 @@
-.sheet {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  text-align: center;
+:host {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f9f4;
+  font-family: monospace;
 }
+
+.sheet {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin-bottom: 16px;
+  color: #095e09;
+}
+
 input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
+
 button {
   padding: 10px 14px;
   margin-top: 6px;
 }
-.info {
-  margin-top: 12px;
+
+.input {
+  border: 2px solid #009505;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 200px;
+}
+
+.pairing-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plant {
+  color: rgb(64, 64, 157);
+  font-weight: 900;
+  line-height: 1.1;
 }
