@@ -41,9 +41,11 @@ export class StateService {
     return this.stateSig().habit;
   }
 
-  checkIn(action: 'up' | 'down'): void {
-    console.log(`Simulating plant motion: ${action}`);
-    // TODO: Replace this with API communication
+  checkIn(action: 'up' | 'down') {
+    const url =
+      action === 'up' ? 'http://100.122.217.84:3000/up' : 'http://100.122.217.84:3000/down';
+
+    return this.http.post<{ ok?: boolean }>(url, {});
   }
 
   clearAll() {
@@ -52,6 +54,6 @@ export class StateService {
   }
 
   pingServer() {
-    return this.http.get('http://100.122.217.84:3000/ping');
+    return this.http.get<{ health: number }>('http://100.122.217.84:3000/ping');
   }
 }

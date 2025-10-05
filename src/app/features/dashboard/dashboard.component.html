@@ -1,7 +1,16 @@
 <div class="dashboard">
   <header class="header">
     <h1>{{ state.state().habit?.name || 'Your Plant' }}</h1>
-    <div class="plant-status">plant status</div>
+    <div class="plant-status">
+      <ng-container *ngIf="!loadingHealth; else loading">
+        <span *ngIf="plantHealth !== null; else unknown">
+          🌿 Health: <strong>{{ plantHealth }}</strong>
+        </span>
+      </ng-container>
+
+      <ng-template #unknown>🌿 Health: Unknown</ng-template>
+      <ng-template #loading>🔄 Checking health...</ng-template>
+    </div>
     <p *ngIf="state.state().habit">Daily check-in by {{ state.state().habit?.checkInTime }}</p>
   </header>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StateService } from '../../core/state.service';
@@ -10,8 +10,30 @@ import { StateService } from '../../core/state.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
+  plantHealth: number | null = null;
+  loadingHealth = false;
+
   constructor(public state: StateService) {}
+
+  ngOnInit() {
+    this.refreshHealth();
+  }
+
+  refreshHealth() {
+    this.loadingHealth = true;
+    this.state.pingServer().subscribe({
+      next: (res) => {
+        this.plantHealth = res?.health ?? null;
+      },
+      error: () => {
+        this.plantHealth = null;
+      },
+      complete: () => {
+        this.loadingHealth = false;
+      },
+    });
+  }
 
   doCheckIn() {
     const habit = this.state.state().habit;
@@ -21,26 +43,38 @@ export class Dashboard {
     }
 
     const action = habit.kind === 'start' ? 'up' : 'down';
-    this.state.checkIn(action);
-
     const msg =
       habit.kind === 'start'
         ? `🌿 Great job! Your plant will survive until your next check-in time (${habit.checkInTime}).`
         : `💀 Oops! Your plant died, but it will come back to life after your next check-in time (${habit.checkInTime}).`;
-    alert(msg);
+
+    this.state.checkIn(action).subscribe({
+      next: () => {
+        alert(msg);
+        this.refreshHealth();
+      },
+      error: (err) => {
+        console.error('Check-in failed:', err);
+        alert('Could not reach the plant. Try again.');
+      },
+    });
   }
 
   testUp() {
     this.state.checkIn('up');
     console.log('up');
+    this.refreshHealth();
   }
+
   testDown() {
     this.state.checkIn('down');
     console.log('down');
+    this.refreshHealth();
   }
 
   clearStorage() {
     this.state.clearAll();
     alert('Local data cleared.');
+    this.plantHealth = null;
   }
 }
