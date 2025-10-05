@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StateService } from '../../core/state';
+import { StateService } from '../../core/state.service';
 import { Router } from '@angular/router';
 
 @Component({

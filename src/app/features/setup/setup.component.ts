@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StateService } from '../../core/state';
+import { StateService } from '../../core/state.service';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +45,7 @@ export class Setup {
     this.freqForm = this.fb.nonNullable.group({
       frequency: 'daily' as HabitFrequency,
       timesPerWeek: 4,
-      checkinTime: '20:00', // required by model; keep a default
+      checkInTime: '20:00', // required by model; keep a default
     });
   }
 
@@ -55,14 +55,14 @@ export class Setup {
     const frequency = this.freqForm.value.frequency as HabitFrequency;
     const timesPerWeek =
       frequency === 'times-per-week' ? this.freqForm.value.timesPerWeek ?? 4 : undefined;
-    const checkinTime = this.freqForm.value.checkinTime!; // required by model
+    const checkInTime = this.freqForm.value.checkInTime!;
 
     this.state.setHabit({
       kind,
       name,
       frequency,
       timesPerWeek,
-      checkinTime,
+      checkInTime,
     });
 
     this.router.navigateByUrl('/dashboard');
