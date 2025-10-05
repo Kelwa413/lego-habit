@@ -1,0 +1,102 @@
+:host {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+}
+.setup-page {
+  min-height: 75vh;
+  padding: 24px 16px 40px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1b5e20;
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: 0;
+}
+.setup-header .sprout {
+  font-weight: 900;
+  line-height: 1;
+  margin: 4px 0 0;
+  color: #2e7d32;
+}
+.setup-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+.setup-header p {
+  margin: 4px 0 0;
+  color: #2e7d32;
+}
+
+.step-card {
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid #cfe9d4;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 16px 14px 20px;
+  margin-top: 0;
+}
+
+.v {
+  display: grid;
+  gap: 10px;
+}
+.full {
+  width: 100%;
+}
+.row {
+  display: grid;
+  gap: 12px;
+}
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.plant-stepper {
+  display: block;
+}
+.plant-stepper .mat-step-header .mat-step-icon {
+  background: #4caf50;
+}
+.plant-stepper .mat-step-header .mat-step-icon-selected,
+.plant-stepper .mat-step-header .mat-step-icon-state-edit {
+  background: #2e7d32;
+}
+.plant-stepper .mat-step-header .mat-step-label {
+  color: #2e7d32;
+}
+
+h2 {
+  margin: 6px 0 10px;
+  font-size: 18px;
+  color: #1b5e20;
+}
+
+.step-label {
+  background-color: green;
+}
+
+@media (max-width: 480px) {
+  .step-card {
+    padding: 12px;
+  }
+  .actions {
+    justify-content: stretch;
+  }
+  .actions > * {
+    flex: 1;
+  }
+}

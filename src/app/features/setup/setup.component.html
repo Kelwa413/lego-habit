@@ -1,52 +1,87 @@
-<mat-horizontal-stepper linear>
-  <mat-step [stepControl]="kindForm">
-    <form [formGroup]="kindForm">
-      <h2>What type of habit?</h2>
-      <mat-radio-group formControlName="kind" class="v">
-        <mat-radio-button value="start">Start a good habit</mat-radio-button>
-        <mat-radio-button value="stop">Stop a bad habit</mat-radio-button>
-      </mat-radio-group>
-      <div class="actions">
-        <button mat-raised-button color="primary" matStepperNext [disabled]="kindForm.invalid">
-          Next
-        </button>
-      </div>
-    </form>
-  </mat-step>
+<div class="setup-page">
+  <header class="setup-header">
+    <h1>Habit Setup</h1>
+    <p>Quick 3 steps to keep your plant alive</p>
+  </header>
 
-  <mat-step [stepControl]="nameForm">
-    <form [formGroup]="nameForm">
-      <h2>Name your habit</h2>
-      <mat-form-field appearance="outline" class="full">
-        <mat-label>Habit name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-      <div class="actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" matStepperNext [disabled]="nameForm.invalid">
-          Next
-        </button>
-      </div>
-    </form>
-  </mat-step>
+  <section class="step-card">
+    <mat-horizontal-stepper linear class="plant-stepper">
+      <mat-step [stepControl]="kindForm">
+        <ng-template matStepLabel class="step-label">Type</ng-template>
+        <form [formGroup]="kindForm">
+          <h2>What type of habit?</h2>
+          <mat-radio-group formControlName="kind" class="v">
+            <mat-radio-button value="start">Start a good habit</mat-radio-button>
+            <mat-radio-button value="stop">Stop a bad habit</mat-radio-button>
+          </mat-radio-group>
+          <div class="actions">
+            <button mat-raised-button color="primary" matStepperNext [disabled]="kindForm.invalid">
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
 
-  <mat-step [stepControl]="freqForm">
-    <form [formGroup]="freqForm">
-      <h2>Daily Check-in Deadline</h2>
+      <mat-step [stepControl]="nameForm">
+        <ng-template matStepLabel class="step-label">Name</ng-template>
+        <form [formGroup]="nameForm">
+          <h2>Name your habit</h2>
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Habit name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <div class="actions">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext [disabled]="nameForm.invalid">
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
 
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Preferred check-in time</mat-label>
-          <input matInput type="time" formControlName="checkInTime" />
-        </mat-form-field>
-      </div>
-
-      <div class="actions">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" (click)="finish()" [disabled]="freqForm.invalid">
-          Finish
-        </button>
-      </div>
-    </form></mat-step
-  ></mat-horizontal-stepper
->
+      <mat-step [stepControl]="freqForm">
+        <ng-template matStepLabel class="step-label">Deadline</ng-template>
+        <form [formGroup]="freqForm">
+          <h2>Daily Check-in Deadline</h2>
+          <div class="row">
+            <mat-form-field appearance="outline" class="full">
+              <mat-label>Preferred check-in time</mat-label>
+              <input matInput type="time" formControlName="checkInTime" />
+            </mat-form-field>
+          </div>
+          <div class="actions">
+            <button mat-button matStepperPrevious>Back</button>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="finish()"
+              [disabled]="freqForm.invalid"
+            >
+              Finish
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </section>
+  <div class="sprout">
+    <pre ngNonBindable>
+     __
+  .-/  \-.
+ (  \__/  )
+/`-./;;\.-`\
+\ _.\;;/._ /
+ (  /  \  )
+  '-\__/-'.-,
+ ,    \\ (-. )
+ |\_   ||/.-`
+ \'.\_ |;`
+  '--,\||     ,
+      `;|   _/|
+       // _/.'/
+      //_/,--'
+     ||'-`
+      </pre
+    >
+  </div>
+</div>
