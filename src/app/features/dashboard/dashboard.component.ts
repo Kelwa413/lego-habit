@@ -32,9 +32,11 @@ export class Dashboard {
 
   testUp() {
     this.state.checkIn('up');
+    console.log('up');
   }
   testDown() {
     this.state.checkIn('down');
+    console.log('down');
   }
 
   clearStorage() {

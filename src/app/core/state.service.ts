@@ -1,10 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { AppState, HabitConfig } from './models/app-state';
+import { HttpClient } from '@angular/common/http';
 
 const KEY = 'legoHabit.state';
 
 @Injectable({ providedIn: 'root' })
 export class StateService {
+  constructor(private http: HttpClient) {}
   private stateSig = signal<AppState>(this.load());
   state = this.stateSig.asReadonly();
 
@@ -47,5 +49,9 @@ export class StateService {
   clearAll() {
     this.stateSig.set({});
     localStorage.removeItem(KEY);
+  }
+
+  pingServer() {
+    return this.http.get('http://100.122.217.84:3000/ping');
   }
 }
