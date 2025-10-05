@@ -4,6 +4,7 @@
     <p *ngIf="state.state().habit">Daily check-in by {{ state.state().habit?.checkInTime }}</p>
   </header>
 
+  <!-- MAIN ACTION -->
   <section class="card main">
     <button class="btn btn-main" (click)="doCheckIn()">
       {{
@@ -12,17 +13,41 @@
     </button>
   </section>
 
-  <section class="card side">
-    <div class="row">
-      <button class="btn btn-secondary" (click)="testUp()">Test Up</button>
-      <button class="btn btn-secondary" (click)="testDown()">Test Down</button>
-    </div>
+  <div class="cards-row">
+    <section class="card features">
+      <h3>Features</h3>
+      <div class="row">
+        <button class="btn btn-secondary" routerLink="/setup">Setup Habit</button>
+        <button class="btn btn-secondary" routerLink="/pair">Pair New Plant</button>
+      </div>
+    </section>
 
-    <div class="row">
-      <button class="btn btn-secondary" routerLink="/setup">Setup Habit</button>
-      <button class="btn btn-secondary" routerLink="/pair">Pair New Plant</button>
-    </div>
-  </section>
+    <section class="card tests">
+      <h3>Testing</h3>
+      <div class="row">
+        <button class="btn btn-secondary" (click)="testUp()">Test Up</button>
+        <button class="btn btn-secondary" (click)="testDown()">Test Down</button>
+      </div>
+    </section>
+  </div>
+
+  <pre class="flower" ngNonBindable>
+       .-.
+ __   /   \   __
+(  `'.\   /.'`  )
+ '-._.(;;;)._.-'
+ .-'  ,`"`,  '-.
+(__.-'/   \'-.__)/)_
+      \   /\    / / )
+       '-'  |   \/.-')
+       ,    | .'/\'..)
+       |\   |/  | \_)
+       \ |  |   \_/
+        | \ /
+         \|/  
+          / 
+</pre
+  >
 
   <footer class="footer">
     <button class="btn btn-danger" (click)="clearStorage()">Clear local data</button>
