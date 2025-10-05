@@ -1,10 +1,10 @@
 <div class="dashboard">
   <header class="header">
     <h1>{{ state.state().habit?.name || 'Your Plant' }}</h1>
+    <div class="plant-status">plant status</div>
     <p *ngIf="state.state().habit">Daily check-in by {{ state.state().habit?.checkInTime }}</p>
   </header>
 
-  <!-- MAIN ACTION -->
   <section class="card main">
     <button class="btn btn-main" (click)="doCheckIn()">
       {{
